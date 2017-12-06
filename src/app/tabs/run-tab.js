@@ -376,7 +376,7 @@ function settings (appAPI, appEvents) {
           <option id="vm-mode"
             title="Execution environment does not connect to any node, everything is local and in memory only."
             value="vm"
-            checked name="executionContext">
+            name="executionContext">
             JavaScript VM
           </option>
           <option id="injected-mode"
@@ -419,6 +419,15 @@ function settings (appAPI, appEvents) {
       </div>
     </div>
   `
+
+  setTimeout(function () {
+    var select = document.querySelector('#selectExEnvOptions')
+    var optionVMindex = 0
+    if (appAPI.config.get('settings/always-use-vm')) {
+      // select.options[optionVMindex].selected = true
+      select.selectedIndex = optionVMindex
+    }
+  }, 0)
 
   // EVENTS
   appEvents.udapp.register('transactionExecuted', (error, from, to, data, lookupOnly, txResult) => {
